@@ -15,5 +15,16 @@ CREATE TABLE PESSOAS(
 	PSO_RG char(9) not null,
 	PSO_Email varchar(300),
 	PSO_TPP_Id int not null,
+	PRIMARY KEY(PSO_Id),
 	FOREIGN KEY(PSO_TPP_Id) REFERENCES TIPOS_PESSOA(TPP_Id)
+);
+
+--Trigrama USUAIO = USU
+CREATE TABLE USUARIOS(
+	USU_Id int IDENTITY(1,1),
+	USU_Login varchar(200) not null,
+	USU_Senha varchar(200) not null,
+	USU_PSO_Id int not null,
+	PRIMARY KEY(USU_Id),
+	FOREIGN KEY(USU_PSO_Id) REFERENCES PESSOAS(PSO_Id)
 );
