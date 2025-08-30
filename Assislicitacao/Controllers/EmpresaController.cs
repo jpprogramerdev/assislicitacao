@@ -199,7 +199,7 @@ namespace Assislicitacao.Controllers {
                 empresa.CNPJ = empresa.CNPJ.Replace("-", "");
 
                 await _facadeEmpresa.Inserir(empresa);
-                TempData["EmpresaSalva"] = "Empresa cadastrada com sucesso";
+                
             } catch (Exception ex) {
                 TempData["FalhaSalvarEmpresa"] = "Falha ao salvar empresa: " + ex.Message;
             }
@@ -207,9 +207,11 @@ namespace Assislicitacao.Controllers {
             if (HttpContext.Session.GetInt32("usuarioId") == null) {
                 TempData["SucessoCadastroLogin"] = "Sucesso ao se cadastrar. Por favor, efetue o Login";
                 return RedirectToAction("Login", "Login");
+            } else {
+                TempData["EmpresaSalva"] = "Empresa cadastrada com sucesso";
             }
 
-            return RedirectToAction("ConsultarCNPJ", "Empresa");
+                return RedirectToAction("ConsultarCNPJ", "Empresa");
         }
 
         [HttpGet]
